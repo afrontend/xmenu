@@ -58,6 +58,7 @@
   },
   "scripts": {
     "pretest": "eslint .",
+    "start": "node src/cli.js -i",
     "test": "jest"
   },
   "repository": "https://github.com/afrontend/xmenu.git",
