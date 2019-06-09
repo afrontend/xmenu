@@ -1,4 +1,5 @@
-# xmenu [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# xmenu
+<!-- [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] -->
 > menu list to execute a command
 
 ## Installation
@@ -12,7 +13,7 @@ $ npm install --save xmenu
 ```js
 const xmenu = require('xmenu');
 
-xmenu('Rainbow');
+xmenu.run('terminator');
 ```
 ## License
 
