@@ -40,8 +40,10 @@ function activate(option) {
         }
       ])
       .then(answers => {
-        setDefaultCmd(answers.cmd);
-        xmenu.run(answers.cmd);
+        if (answers.cmd) {
+          setDefaultCmd(answers.cmd);
+          xmenu.run(answers.cmd);
+        }
       });
   }
 }
