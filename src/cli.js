@@ -4,12 +4,12 @@ const figlet = require("figlet");
 const inquirer = require("inquirer");
 const pkg = require("../package.json");
 const program = require("commander");
-const { run, readCmdListFromFile, getCmdNames } = require("../lib/index.js");
+const { run, getCmdNames, getCmdByName } = require("../lib/index.js");
 
 const conf = new Configstore(pkg.name, {});
-const getDefaultCmd = () =>
-  conf.get("cmd") === undefined ? "terminator" : conf.get("cmd");
-const setDefaultCmd = cmd => conf.set("cmd", cmd);
+const getDefaultName = () =>
+  conf.get("name") === undefined ? "terminator" : conf.get("name");
+const setDefaultCmd = name => conf.set("name", name);
 
 const introMessage = msg => {
   console.log(
@@ -24,7 +24,6 @@ const introMessage = msg => {
 program
   .version(pkg.version)
   .option("-i, --interactive", "interactive mode")
-  .option("-c, --cmd [cmd]", "command")
   .option("-s, --show", "show commands")
   .parse(process.argv);
 
@@ -37,7 +36,7 @@ function activate(option) {
           type: "input",
           name: "cmd",
           message: "명령어",
-          default: getDefaultCmd()
+          default: getDefaultName()
         }
       ])
       .then(answers => {
@@ -52,17 +51,18 @@ function activate(option) {
     inquirer
       .prompt([
         {
-          type: 'list',
-          name: 'cmd',
-          message: 'What?',
+          type: "list",
+          name: "name",
+          message: "What?",
           choices: getCmdNames(),
-          default: getDefaultCmd()
+          default: getDefaultName()
         }
       ])
       .then(answers => {
-        if (answers.cmd) {
-          setDefaultCmd(answers.cmd);
-          run(answers.cmd);
+        if (answers.name) {
+          setDefaultCmd(answers.name);
+          const c = getCmdByName(answers.name);
+          run(c.program, c.args);
           process.exit(0);
         } else {
           process.exit(1);
