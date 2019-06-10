@@ -49,7 +49,25 @@ function activate(option) {
   }
 
   if (option.show) {
-    console.log(JSON.stringify(getCmdNames()));
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'cmd',
+          message: 'What?',
+          choices: getCmdNames(),
+          default: getDefaultCmd()
+        }
+      ])
+      .then(answers => {
+        if (answers.cmd) {
+          setDefaultCmd(answers.cmd);
+          run(answers.cmd);
+          process.exit(0);
+        } else {
+          process.exit(1);
+        }
+      });
   }
 }
 
