@@ -4,7 +4,7 @@ const figlet = require("figlet");
 const inquirer = require("inquirer");
 const pkg = require("../package.json");
 const program = require("commander");
-const { run, readCmdListFromFile } = require("../lib/index.js");
+const { run, readCmdListFromFile, getCmdNames } = require("../lib/index.js");
 
 const conf = new Configstore(pkg.name, {});
 const getDefaultCmd = () =>
@@ -49,7 +49,7 @@ function activate(option) {
   }
 
   if (option.show) {
-    console.log(JSON.stringify(readCmdListFromFile()));
+    console.log(JSON.stringify(getCmdNames()));
   }
 }
 
