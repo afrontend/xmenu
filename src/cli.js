@@ -8,7 +8,7 @@ const xmenu = require("../lib/index.js");
 
 const conf = new Configstore(pkg.name, {});
 const getDefaultCmd = () =>
-  conf.get("cmd") === undefined ? "javascript" : conf.get("cmd");
+  conf.get("cmd") === undefined ? "terminator" : conf.get("cmd");
 const setDefaultCmd = cmd => conf.set("cmd", cmd);
 
 const introMessage = msg => {
