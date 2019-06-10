@@ -4,7 +4,7 @@ const figlet = require("figlet");
 const inquirer = require("inquirer");
 const pkg = require("../package.json");
 const program = require("commander");
-const xmenu = require("../lib/index.js");
+const { run, readCmdListFromFile } = require("../lib/index.js");
 
 const conf = new Configstore(pkg.name, {});
 const getDefaultCmd = () =>
@@ -24,7 +24,8 @@ const introMessage = msg => {
 program
   .version(pkg.version)
   .option("-i, --interactive", "interactive mode")
-  .option("-c, --cmd [cmd]", "cmd")
+  .option("-c, --cmd [cmd]", "command")
+  .option("-s, --show", "show commands")
   .parse(process.argv);
 
 function activate(option) {
@@ -42,9 +43,13 @@ function activate(option) {
       .then(answers => {
         if (answers.cmd) {
           setDefaultCmd(answers.cmd);
-          xmenu.run(answers.cmd);
+          run(answers.cmd);
         }
       });
+  }
+
+  if (option.show) {
+    console.log(JSON.stringify(readCmdListFromFile()));
   }
 }
 
