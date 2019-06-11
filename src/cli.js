@@ -24,7 +24,6 @@ const introMessage = msg => {
 program
   .version(pkg.version)
   .option("-i, --interactive", "interactive mode")
-  .option("-s, --show", "show commands")
   .parse(process.argv);
 
 function activate(option) {
@@ -45,29 +44,30 @@ function activate(option) {
           run(answers.cmd);
         }
       });
-  }
-
-  if (option.show) {
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "name",
-          message: "What?",
-          choices: getCmdNames(),
-          default: getDefaultName()
-        }
-      ])
-      .then(answers => {
-        if (answers.name) {
-          setDefaultCmd(answers.name);
-          const c = getCmdByName(answers.name);
-          run(c.program, c.args);
-          process.exit(0);
-        } else {
-          process.exit(1);
-        }
-      });
+  } else {
+    const names = getCmdNames();
+    if (names && names.length > 0) {
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "name",
+            message: "command",
+            choices: names,
+            default: getDefaultName()
+          }
+        ])
+        .then(answers => {
+          if (answers.name) {
+            setDefaultCmd(answers.name);
+            const c = getCmdByName(answers.name);
+            run(c.program, c.args);
+            process.exit(0);
+          } else {
+            process.exit(1);
+          }
+        });
+    }
   }
 }
 
