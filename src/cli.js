@@ -27,8 +27,8 @@ program
   .parse(process.argv);
 
 function activate(option) {
+  introMessage("xmenu");
   if (option.interactive) {
-    introMessage("xmenu");
     inquirer
       .prompt([
         {
