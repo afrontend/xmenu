@@ -23,52 +23,30 @@ const introMessage = msg => {
 
 program
   .version(pkg.version)
-  .option("-i, --interactive", "interactive mode")
   .parse(process.argv);
 
 function activate(option) {
   introMessage("xmenu");
-  if (option.interactive) {
-    inquirer
-      .prompt([
-        {
-          type: "input",
-          name: "cmd",
-          message: "명령어",
-          default: getDefaultName()
-        }
-      ])
-      .then(answers => {
-        if (answers.cmd) {
-          setDefaultCmd(answers.cmd);
-          run(answers.cmd);
-        }
-      });
-  } else {
-    const names = getCmdNames();
-    if (names && names.length > 0) {
-      inquirer
-        .prompt([
-          {
-            type: "list",
-            name: "name",
-            message: "command",
-            choices: names,
-            default: getDefaultName()
-          }
-        ])
-        .then(answers => {
-          if (answers.name) {
-            setDefaultCmd(answers.name);
-            const c = getCmdByName(answers.name);
-            run(c.program, c.args);
-            process.exit(0);
-          } else {
-            process.exit(1);
-          }
-        });
-    }
-  }
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "name",
+        message: "command",
+        choices: getCmdNames(),
+        default: getDefaultName()
+      }
+    ])
+    .then(answers => {
+      if (answers.name) {
+        setDefaultCmd(answers.name);
+        const c = getCmdByName(answers.name);
+        run(c.program, c.args);
+        process.exit(0);
+      } else {
+        process.exit(1);
+      }
+    });
 }
 
 activate(program);
