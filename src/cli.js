@@ -21,18 +21,16 @@ const introMessage = msg => {
   );
 };
 
-program
-  .version(pkg.version)
-  .parse(process.argv);
+program.version(pkg.version).parse(process.argv);
 
-function activate(option) {
+function activate() {
   introMessage("xmenu");
   inquirer
     .prompt([
       {
         type: "list",
         name: "name",
-        message: "command",
+        message: ">>",
         choices: getCmdNames(),
         default: getDefaultName()
       }
@@ -49,4 +47,4 @@ function activate(option) {
     });
 }
 
-activate(program);
+activate();

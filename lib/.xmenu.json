@@ -3,6 +3,10 @@
     {
       "title": "xeyes",
       "program": "xeyes"
+    },
+    {
+      "title": "xterm",
+      "program": "xterm"
     }
   ]
 }
