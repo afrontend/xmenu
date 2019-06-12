@@ -5,16 +5,21 @@
 ## Installation
 
 ```sh
-$ npm install --save xmenu
+$ npm install -g xmenu
 ```
 
 ## Usage
 
 ```js
-const xmenu = require('xmenu');
+$ xmenu xeyes xeyes xterm xterm terminator terminator
 
-xmenu.run('terminator');
+or
+
+$ xmenu -c > ~/.xmenu.json
+$ vim ~/.xmenu.json
+$ xmenu
 ```
+
 ## License
 
 MIT © [Bob Hwang](https://agvim.wordpress.com)

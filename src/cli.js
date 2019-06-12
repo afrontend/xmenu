@@ -21,30 +21,57 @@ const introMessage = msg => {
   );
 };
 
-program.version(pkg.version).parse(process.argv);
+program
+  .version(pkg.version)
+  .option('-c, --show-config-file', 'show config file')
+  .parse(process.argv);
 
-function activate() {
-  introMessage("xmenu");
-  inquirer
-    .prompt([
-      {
-        type: "list",
-        name: "name",
-        message: ">>",
-        choices: getCmdNames(),
-        default: getDefaultName()
-      }
-    ])
-    .then(answers => {
-      if (answers.name) {
-        setDefaultCmd(answers.name);
-        const c = getCmdByName(answers.name);
-        run(c.program, c.args);
-        process.exit(0);
-      } else {
-        process.exit(1);
-      }
-    });
+function activate(option) {
+  if (option.showConfigFile) {
+    console.log(`
+{
+  "cmdList": [
+    {
+      "title": "xeyes",
+      "program": "xeyes"
+    },
+    {
+      "title": "xterm",
+      "program": "xterm"
+    },
+    {
+      "title": "terminator",
+      "program": "terminator"
+    }
+  ]
+}
+`);
+  } else {
+    introMessage("xmenu");
+    const names = getCmdNames()
+    if (names.length > 0) {
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "name",
+            message: ">",
+            choices: names,
+            default: getDefaultName()
+          }
+        ])
+        .then(answers => {
+          if (answers.name) {
+            setDefaultCmd(answers.name);
+            const c = getCmdByName(answers.name);
+            run(c.program, c.args);
+            process.exit(0);
+          } else {
+            process.exit(1);
+          }
+        });
+    }
+  }
 }
 
-activate();
+activate(program);

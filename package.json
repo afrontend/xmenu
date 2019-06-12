@@ -13,8 +13,11 @@
     "src"
   ],
   "main": "lib/index.js",
+  "bin": {
+    "xmenu": "./src/cli.js"
+  },
   "keywords": [
-    ""
+    "menu"
   ],
   "devDependencies": {
     "coveralls": "^3.0.2",
