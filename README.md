@@ -18,6 +18,16 @@ or
 $ xmenu -c > ~/.xmenu.json
 $ vim ~/.xmenu.json
 $ xmenu
+
+ __  ___ __ ___   ___ _ __  _   _
+ \ \/ / '_ ` _ \ / _ \ '_ \| | | |
+  >  <| | | | | |  __/ | | | |_| |
+ /_/\_\_| |_| |_|\___|_| |_|\__,_|
+
+? > (Use arrow keys)
+  xeyes
+  xterm
+❯ terminator
 ```
 
 ## License
