@@ -23,7 +23,7 @@ const introMessage = msg => {
 
 program
   .version(pkg.version)
-  .option('-c, --show-config-file', 'show config file')
+  .option("-c, --show-config-file", "show config file")
   .parse(process.argv);
 
 function activate(option) {
@@ -48,7 +48,7 @@ function activate(option) {
 `);
   } else {
     introMessage("xmenu");
-    const names = getCmdNames()
+    const names = getCmdNames();
     if (names.length > 0) {
       inquirer
         .prompt([
