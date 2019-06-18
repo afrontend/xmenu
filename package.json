@@ -70,6 +70,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "commander": "^2.20.0",
     "configstore": "^4.0.0",
     "figlet": "^1.2.3",
     "inquirer": "^6.3.1"
