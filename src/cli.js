@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+const _ = require("lodash");
 const Configstore = require("configstore");
 const figlet = require("figlet");
 const inquirer = require("inquirer");
 const pkg = require("../package.json");
 const program = require("commander");
-const { run, getCmdNames, getCmdByName } = require("../lib/index.js");
+const { run, getCmdList, getCmdListFromFile } = require("../lib/index.js");
 
 const conf = new Configstore(pkg.name, {});
 const getDefaultName = () =>
@@ -23,8 +24,22 @@ const introMessage = msg => {
 
 program
   .version(pkg.version)
-  .option("-c, --show-config-file", "show config file")
+  .option("-s, --show-config-file", "show config file")
+  .option("-c, --config-file <file>", "use config file")
   .parse(process.argv);
+
+const byName = (name, list) => {
+  var found = _.find(list, cmd => {
+    return cmd.name.includes(name);
+  });
+  return found ? found : {};
+};
+
+const justName = (list) => {
+  return _.map(list, cmd => {
+    return cmd.name;
+  });
+}
 
 function activate(option) {
   if (option.showConfigFile) {
@@ -46,31 +61,38 @@ function activate(option) {
   ]
 }
 `);
+  return;
+  }
+
+  let cmdList = [];
+  introMessage("xmenu");
+  if (option.configFile) {
+    cmdList = getCmdListFromFile(option.configFile);
   } else {
-    introMessage("xmenu");
-    const names = getCmdNames();
-    if (names.length > 0) {
-      inquirer
-        .prompt([
-          {
-            type: "list",
-            name: "name",
-            message: ">",
-            choices: names,
-            default: getDefaultName()
-          }
-        ])
-        .then(answers => {
-          if (answers.name) {
-            setDefaultCmd(answers.name);
-            const c = getCmdByName(answers.name);
-            run(c.program, c.args);
-            process.exit(0);
-          } else {
-            process.exit(1);
-          }
-        });
-    }
+    cmdList = getCmdList();
+  }
+
+  if (cmdList.length > 0) {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "name",
+          message: ">",
+          choices: justName(cmdList),
+          default: getDefaultName()
+        }
+      ])
+      .then(answers => {
+        if (answers.name) {
+          setDefaultCmd(answers.name);
+          const c = byName(answers.name, cmdList);
+          run(c.program, c.args);
+          process.exit(0);
+        } else {
+          process.exit(1);
+        }
+      });
   }
 }
 
