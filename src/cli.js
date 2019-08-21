@@ -28,14 +28,14 @@ program
   .option("-c, --config-file <file>", "use config file")
   .parse(process.argv);
 
-const byName = (name, list) => {
-  var found = _.find(list, cmd => {
+const getCommand = (name, list) => {
+  const found = _.find(list, cmd => {
     return cmd.name.includes(name);
   });
   return found ? found : {};
 };
 
-const justName = (list) => {
+const onlyName = (list) => {
   return _.map(list, cmd => {
     return cmd.name;
   });
@@ -79,14 +79,14 @@ function activate(option) {
           type: "list",
           name: "name",
           message: ">",
-          choices: justName(cmdList),
+          choices: onlyName(cmdList),
           default: getDefaultName()
         }
       ])
       .then(answers => {
         if (answers.name) {
           setDefaultCmd(answers.name);
-          const c = byName(answers.name, cmdList);
+          const c = getCommand(answers.name, cmdList);
           run(c.program, c.args);
           process.exit(0);
         } else {
@@ -94,6 +94,7 @@ function activate(option) {
         }
       });
   }
+
 }
 
 activate(program);
