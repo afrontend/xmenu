@@ -41,6 +41,39 @@ const onlyName = (list) => {
   });
 }
 
+const displayMenu = (cmdList) => {
+  if (cmdList.length > 0) {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "name",
+          message: ">",
+          choices: onlyName(cmdList),
+          default: getDefaultName()
+        }
+      ])
+      .then(answers => {
+        const c = getCommand(answers.name, cmdList);
+        if (c.program) {
+          if (answers.name) {
+            setDefaultCmd(answers.name);
+            run(c.program, c.args);
+            process.exit(0);
+          } else {
+            process.exit(1);
+          }
+        } else {
+          if (c.cmdList) {
+            displayMenu(c.cmdList);
+          } else {
+            process.exit(1);
+          }
+        }
+      });
+  }
+}
+
 function activate(option) {
   if (option.showConfigFile) {
     console.log(`
@@ -57,6 +90,19 @@ function activate(option) {
     {
       "title": "terminator",
       "program": "terminator"
+    },
+    {
+      "title": "next",
+      "cmdList": [
+        {
+          "title": "xterm",
+          "program": "xterm"
+        },
+        {
+          "title": "terminator",
+          "program": "terminator"
+        }
+      ]
     }
   ]
 }
@@ -72,29 +118,7 @@ function activate(option) {
     cmdList = getCmdList();
   }
 
-  if (cmdList.length > 0) {
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "name",
-          message: ">",
-          choices: onlyName(cmdList),
-          default: getDefaultName()
-        }
-      ])
-      .then(answers => {
-        if (answers.name) {
-          setDefaultCmd(answers.name);
-          const c = getCommand(answers.name, cmdList);
-          run(c.program, c.args);
-          process.exit(0);
-        } else {
-          process.exit(1);
-        }
-      });
-  }
-
+  displayMenu(cmdList);
 }
 
 activate(program);
