@@ -48,7 +48,7 @@ const displayMenu = (cmdList) => {
         {
           type: "list",
           name: "name",
-          message: ">",
+          message: "choice",
           choices: onlyName(cmdList),
           default: getDefaultName()
         }
@@ -84,19 +84,15 @@ function activate(option) {
       "program": "xeyes"
     },
     {
-      "title": "xterm",
-      "program": "xterm"
-    },
-    {
-      "title": "terminator",
-      "program": "terminator"
-    },
-    {
-      "title": "next",
+      "title": "terminal",
       "cmdList": [
         {
           "title": "xterm",
           "program": "xterm"
+        },
+        {
+          "title": "gnome-terminal",
+          "program": "gnome-terminal"
         },
         {
           "title": "terminator",
