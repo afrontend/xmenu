@@ -111,7 +111,7 @@ function activate(option) {
   if (option.configFile) {
     cmdList = getCmdListFromFile(option.configFile);
   } else {
-    cmdList = getCmdList();
+    cmdList = getCmdList(process.argv);
   }
 
   displayMenu(cmdList);
