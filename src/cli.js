@@ -24,8 +24,8 @@ const introMessage = msg => {
 
 program
   .version(pkg.version)
-  .option("-s, --show-config-file", "show config file")
-  .option("-c, --config-file <file>", "use config file")
+  .option("-s, --cat-config", "cat config file")
+  .option("-u, --use-config <file>", "use config file")
   .parse(process.argv);
 
 const getCommand = (name, list) => {
