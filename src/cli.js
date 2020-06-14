@@ -35,13 +35,13 @@ const getCommand = (name, list) => {
   return found ? found : {};
 };
 
-const onlyName = (list) => {
+const onlyName = list => {
   return _.map(list, cmd => {
     return cmd.name;
   });
-}
+};
 
-const displayMenu = (cmdList) => {
+const displayMenu = cmdList => {
   if (cmdList.length > 0) {
     inquirer
       .prompt([
@@ -64,15 +64,14 @@ const displayMenu = (cmdList) => {
             process.exit(1);
           }
         } else {
-          if (c.cmdList) {
-            displayMenu(c.cmdList);
-          } else {
-            process.exit(1);
+          if (!c.cmdList) {
+            return process.exit(1);
           }
+          displayMenu(c.cmdList);
         }
       });
   }
-}
+};
 
 function activate(option) {
   if (option.showConfigFile) {
@@ -103,7 +102,7 @@ function activate(option) {
   ]
 }
 `);
-  return;
+    return;
   }
 
   let cmdList = [];
