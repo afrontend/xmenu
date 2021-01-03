@@ -24,7 +24,7 @@ const introMessage = msg => {
 
 program
   .version(pkg.version)
-  .option("-s, --cat-config", "cat config file")
+  .option("-s, --cat-sample-config", "cat sample config file")
   .option("-u, --use-config <file>", "use config file")
   .parse(process.argv);
 
@@ -74,7 +74,7 @@ const displayMenu = cmdList => {
 };
 
 function activate(option) {
-  if (option.showConfigFile) {
+  if (option.catSampleConfig) {
     console.log(`
 {
   "cmdList": [
@@ -107,8 +107,8 @@ function activate(option) {
 
   let cmdList = [];
   introMessage("xmenu");
-  if (option.configFile) {
-    cmdList = getCmdListFromFile(option.configFile);
+  if (option.useConfig) {
+    cmdList = getCmdListFromFile(option.useConfig);
   } else {
     cmdList = getCmdList(process.argv);
   }
