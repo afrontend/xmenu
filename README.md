@@ -2,38 +2,45 @@
 <!-- [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] -->
 > menu list to execute a command
 
-## Installation
+## Use npm
 
-```sh
-$ npm install -g xmenu
-```
+Installation
 
-## Usage
+    npm install -g xmenu
 
-```js
-$ xmenu xeyes xeyes xterm xterm terminator terminator
+Usage
 
-or
+    $ xmenu xeyes xeyes xterm xterm terminator terminator
 
-$ xmenu -c > ~/.xmenu.json
-$ vim ~/.xmenu.json
-$ xmenu
+    or
 
- __  ___ __ ___   ___ _ __  _   _
- \ \/ / '_ ` _ \ / _ \ '_ \| | | |
-  >  <| | | | | |  __/ | | | |_| |
- /_/\_\_| |_| |_|\___|_| |_|\__,_|
+    $ xmenu -c > ~/.xmenu.json
+    $ vim ~/.xmenu.json
+    $ xmenu
 
-? > (Use arrow keys)
-  xeyes
-  xterm
-❯ terminator
-```
+    __  ___ __ ___   ___ _ __  _   _
+    \ \/ / '_ ` _ \ / _ \ '_ \| | | |
+    >  <| | | | | |  __/ | | | |_| |
+    /_/\_\_| |_| |_|\___|_| |_|\__,_|
+
+    ? > (Use arrow keys)
+    xeyes
+    xterm
+    ❯ terminator
+
+## Use Docker
+
+Installation
+
+    docker pull afrontend/dongnelibrary
+
+Usage
+
+    docker run --rm afrontend/dongnelibrary dongnelibrary
 
 ## License
 
 MIT © [Bob Hwang](https://agvim.wordpress.com)
-
 
 [npm-image]: https://badge.fury.io/js/xmenu.svg
 [npm-url]: https://npmjs.org/package/xmenu
