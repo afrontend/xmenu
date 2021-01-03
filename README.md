@@ -32,11 +32,11 @@ Usage
 
 Installation
 
-    docker pull afrontend/dongnelibrary
+    docker pull afrontend/xmenu
 
 Usage
 
-    docker run --rm afrontend/dongnelibrary dongnelibrary
+    docker run --rm afrontend/xmenu xmenu
 
 ## License
 
