@@ -1,12 +1,12 @@
 {
   "name": "xmenu",
   "version": "0.0.5",
-  "description": "menu list to execute a command",
+  "description": "program launcher to execute a command in terminal",
   "homepage": "",
   "author": {
     "name": "Bob Hwang",
     "email": "autoscripts@gmail.com",
-    "url": "https://agvim.wordpress.com"
+    "url": "https://afrontend.github.io"
   },
   "files": [
     "lib",

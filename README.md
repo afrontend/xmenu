@@ -1,6 +1,6 @@
 # xmenu
 <!-- [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] -->
-> menu list to execute a command
+> program launcher to execute a command in terminal
 
 ## Use npm
 
@@ -20,7 +20,7 @@ Usage
 
     __  ___ __ ___   ___ _ __  _   _
     \ \/ / '_ ` _ \ / _ \ '_ \| | | |
-    >  <| | | | | |  __/ | | | |_| |
+     >  <| | | | | |  __/ | | | |_| |
     /_/\_\_| |_| |_|\___|_| |_|\__,_|
 
     ? > (Use arrow keys)
@@ -40,7 +40,7 @@ Usage
 
 ## License
 
-MIT © [Bob Hwang](https://agvim.wordpress.com)
+MIT © [Bob Hwang](https://afrontend.github.io)
 
 [npm-image]: https://badge.fury.io/js/xmenu.svg
 [npm-url]: https://npmjs.org/package/xmenu
